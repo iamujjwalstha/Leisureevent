@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leisure Events — Risk Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a28;
+    --border: #2a2a3f;
+    --accent: #ff3b3b;
+    --accent2: #ff7c3b;
+    --accent3: #ffcc3b;
+    --green: #3bff8a;
+    --blue: #3b8aff;
+    --purple: #9b3bff;
+    --text: #e8e8f0;
+    --muted: #6b6b85;
+    --card: #16162a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 0%, #2a0a0a 0%, var(--bg) 70%);
+    padding: 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,59,59,0.03) 40px, rgba(255,59,59,0.03) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,59,59,0.03) 40px, rgba(255,59,59,0.03) 41px);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    border: 1px solid rgba(255,59,59,0.3);
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    letter-spacing: 0.04em;
+    line-height: 0.9;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-top: 1.5rem;
+    max-width: 500px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-nav a {
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+    background: var(--surface);
+  }
+
+  .hero-nav a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 2.5rem;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* PROCESS STEPS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .step {
+    background: var(--surface);
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: background 0.2s;
+    cursor: default;
+  }
+
+  .step:hover { background: var(--surface2); }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--accent);
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .step h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .step p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 12px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* CARDS */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .card {
+    background: var(--card);
+    padding: 1.75rem;
+    transition: background 0.2s;
+  }
+
+  .card:hover { background: var(--surface2); }
+
+  .card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .card p, .card li {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .card ul { padding-left: 1rem; }
+  .card li { margin-bottom: 4px; }
+
+  /* ACCORDION */
+  .accordion { border: 1px solid var(--border); }
+
+  .accordion-item { border-bottom: 1px solid var(--border); }
+  .accordion-item:last-child { border-bottom: none; }
+
+  .accordion-btn {
+    width: 100%;
+    background: var(--surface);
+    border: none;
+    color: var(--text);
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  .accordion-btn:hover { background: var(--surface2); }
+  .accordion-btn.open { color: var(--accent); }
+
+  .accordion-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  .accordion-btn.open .accordion-icon { transform: rotate(45deg); color: var(--accent); }
+
+  .accordion-body {
+    display: none;
+    background: var(--card);
+    padding: 1.5rem;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .accordion-body.open { display: block; }
+  .accordion-body ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+  .accordion-body li { margin-bottom: 6px; }
+  .accordion-body strong { color: var(--text); }
+
+  /* 5x5 MATRIX */
+  .matrix-wrap {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+  }
+
+  .matrix-container {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    min-width: 500px;
+  }
+
+  .matrix-y-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .matrix-inner { flex: 1; }
+
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 40px repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr) 40px;
+    gap: 3px;
+    aspect-ratio: 6/6;
+  }
+
+  .matrix-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .matrix-cell.data {
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .matrix-cell.data:hover {
+    transform: scale(1.08);
+    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+
+  .matrix-cell.row-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    justify-content: flex-end;
+    padding-right: 8px;
+  }
+
+  .matrix-cell.col-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    align-items: flex-start;
+    padding-top: 4px;
+  }
+
+  .matrix-cell.corner { }
+
+  .low { background: rgba(59,255,138,0.15); color: #3bff8a; border: 1px solid rgba(59,255,138,0.2); }
+  .medium { background: rgba(255,204,59,0.15); color: #ffcc3b; border: 1px solid rgba(255,204,59,0.2); }
+  .high { background: rgba(255,124,59,0.15); color: #ff7c3b; border: 1px solid rgba(255,124,59,0.2); }
+  .critical { background: rgba(255,59,59,0.2); color: #ff3b3b; border: 1px solid rgba(255,59,59,0.3); }
+
+  .matrix-cell.data:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 100;
+    color: var(--text);
+  }
+
+  .matrix-x-label {
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .legend-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  /* RISK BUILDER */
+  .risk-builder {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .risk-builder h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .risk-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 1rem;
+    align-items: end;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .risk-inputs { grid-template-columns: 1fr 1fr; }
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .input-group input,
+  .input-group select {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .input-group input:focus,
+  .input-group select:focus { border-color: var(--accent); }
+
+  .input-group select option { background: var(--surface2); }
+
+  .add-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .add-btn:hover { opacity: 0.85; }
+
+  .risk-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .risk-table th {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .risk-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(42,42,63,0.5);
+    color: var(--text);
+    vertical-align: middle;
+  }
+
+  .risk-table tr:last-child td { border-bottom: none; }
+
+  .score-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .del-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .del-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .checklist li:hover { padding-left: 8px; }
+
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.2s;
+  }
+
+  .checklist li.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .checklist li.checked .check-box::after { content: '✓'; color: #0a0a0f; font-size: 12px; font-weight: 900; }
+
+  .check-text { font-size: 14px; color: var(--text); }
+  .checklist li.checked .check-text { text-decoration: line-through; color: var(--muted); }
+
+  /* RESPONSE CARDS */
+  .response-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .response-card {
+    background: var(--card);
+    padding: 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .response-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+  }
+
+  .response-card.avoid::before { background: var(--accent); }
+  .response-card.transfer::before { background: var(--blue); }
+  .response-card.minimize::before { background: var(--accent3); }
+  .response-card.optimize::before { background: var(--green); }
+
+  .response-card .r-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .avoid .r-label { color: var(--accent); }
+  .transfer .r-label { color: var(--blue); }
+  .minimize .r-label { color: var(--accent3); }
+  .optimize .r-label { color: var(--green); }
+
+  .response-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    line-height: 1;
+  }
+
+  .response-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .response-card .example {
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    background: var(--surface);
+    padding: 10px;
+    border-radius: 2px;
+    color: var(--muted);
+  }
+
+  .response-card .example strong { color: var(--text); }
+
+  /* MONITOR */
+  .monitor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .monitor-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 2px;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+
+  .monitor-item:hover { border-color: var(--accent); }
+
+  .monitor-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .monitor-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .monitor-item p { font-size: 12px; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 3rem;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* QUIZ */
+  .quiz-wrap { }
+
+  .quiz-q {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    margin-bottom: 1rem;
+    border-radius: 2px;
+  }
+
+  .quiz-q .q-text {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 14px;
+  }
+
+  .quiz-options { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .quiz-opt {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 14px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .quiz-opt:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .quiz-opt.correct { background: rgba(59,255,138,0.1); border-color: var(--green); color: var(--green); }
+  .quiz-opt.wrong { background: rgba(255,59,59,0.1); border-color: var(--accent); color: var(--accent); }
+  .quiz-opt:disabled { cursor: default; opacity: 0.7; }
+
+  .quiz-feedback {
+    margin-top: 0.75rem;
+    font-size: 13px;
+    min-height: 20px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .quiz-score {
+    text-align: center;
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: none;
+  }
+
+  .quiz-score .score-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .quiz-score p { color: var(--muted); margin-top: 0.5rem; }
+
+  .reset-btn {
+    margin-top: 1rem;
+    background: none;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 10px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover { background: var(--accent); color: white; }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* tag pills */
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    margin: 2px;
+  }
+
+  .pill-red { background: rgba(255,59,59,0.15); color: var(--accent); border: 1px solid rgba(255,59,59,0.2); }
+  .pill-blue { background: rgba(59,138,255,0.15); color: var(--blue); border: 1px solid rgba(59,138,255,0.2); }
+  .pill-green { background: rgba(59,255,138,0.15); color: var(--green); border: 1px solid rgba(59,255,138,0.2); }
+  .pill-yellow { background: rgba(255,204,59,0.15); color: var(--accent3); border: 1px solid rgba(255,204,59,0.2); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Leisure Events · Week 17</div>
+  <h1>RISK<br><span>MGMT</span></h1>
+  <p class="hero-sub">An interactive guide to identifying, assessing, and responding to event risks</p>
+  <nav class="hero-nav">
+    <a href="#what">What is Risk?</a>
+    <a href="#legal">Legal Risks</a>
+    <a href="#business">Business Risks</a>
+    <a href="#identify">Identify</a>
+    <a href="#matrix">5×5 Matrix</a>
+    <a href="#respond">Response</a>
+    <a href="#monitor">Monitor</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+</div>
+
+<hr class="divider">
+
+<!-- WHAT IS RISK MANAGEMENT -->
+<section id="what">
+  <div class="reveal">
+    <div class="section-label">Overview</div>
+    <div class="section-title">What is Risk<br>Management?</div>
+    <p style="color:var(--muted);max-width:600px;margin-bottom:2.5rem;">The optimization of acceptable risks and the minimization or elimination of unacceptable risks across all aspects of an event.</p>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Identify</h3>
+      <p>Spot all possible risks — legal, business, environmental, operational — before they happen.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Assess</h3>
+      <p>Evaluate each risk using qualitative and quantitative methods including the 5×5 matrix.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Treat & Respond</h3>
+      <p>Develop strategies to avoid, transfer, minimize, or optimize each identified risk.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Monitor & Review</h3>
+      <p>Continuously revisit your risk assessment and update it as circumstances change.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LEGAL RISKS -->
+<section id="legal">
+  <div class="reveal">
+    <div class="section-label">Legal</div>
+    <div class="section-title">Legal Risks</div>
+  </div>
+
+  <div class="tabs reveal">
+    <button class="tab-btn active" onclick="switchTab(this,'tort')">Tort Law</button>
+    <button class="tab-btn" onclick="switchTab(this,'contract')">Contract Law</button>
+    <button class="tab-btn" onclick="switchTab(this,'ip')">Intellectual Property</button>
+    <button class="tab-btn" onclick="switchTab(this,'property')">Personal Property</button>
+    <button class="tab-btn" onclick="switchTab(this,'criminal')">Criminal Law</button>
+  </div>
+
+  <!-- TORT -->
+  <div class="tab-panel active" id="tort">
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">⚖️</div>
+        <h3>What is Tort Law?</h3>
+        <p>A civil wrong that causes harm or loss to another person. In events, it covers injuries to participants, spectators, or third parties.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>Intentional Liability</h3>
+        <ul>
+          <li>Knowingly allowing unsafe conditions</li>
+          <li>Deliberately misleading participants about safety</li>
+          <li>Willful disregard of known hazards</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚠️</div>
+        <h3>Unintentional Liability</h3>
+        <ul>
+          <li>Spectator hit by cheese wheel</li>
+          <li>Participant collides with bystander</li>
+          <li>Inadequate barriers causing crowd injury</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏛️</div>
+        <h3>Professional Duties</h3>
+        <ul>
+          <li>Provide adequate safety briefings</li>
+          <li>Ensure medical staff on site</li>
+          <li>Maintain safe spectator zones</li>
+          <li>Conduct proper risk assessments</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTRACT -->
+  <div class="tab-panel" id="contract">
+    <div class="card-grid" style="margin-bottom:1.5rem">
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>5 Elements of a Valid Contract</h3>
+        <ul>
+          <li><strong style="color:var(--text)">Offer</strong> — one party proposes terms</li>
+          <li><strong style="color:var(--text)">Acceptance</strong> — other party agrees</li>
+          <li><strong style="color:var(--text)">Consideration</strong> — something of value exchanged</li>
+          <li><strong style="color:var(--text)">Intention</strong> — legal commitment intended</li>
+          <li><strong style="color:var(--text)">Capacity</strong> — both parties can legally sign</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚚</div>
+        <h3>Supplier Contracts Must Include</h3>
+        <ul>
+          <li>What is being supplied</li>
+          <li>Delivery timeline</li>
+          <li>Quality standards</li>
+          <li>Payment terms</li>
+          <li>Penalty clauses for failure</li>
+          <li>Termination conditions</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <h3>Sponsorship Contracts</h3>
+        <ul>
+          <li>Sponsorship fee & payment schedule</li>
+          <li>Exclusivity clause</li>
+          <li>Branding rights</li>
+          <li>Deliverables from organizer</li>
+          <li>Force majeure clause</li>
+          <li>Dispute resolution method</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Breach of Contract</h3>
+        <p>If a supplier fails to deliver, the organizer can claim:</p>
+        <ul>
+          <li><strong style="color:var(--text)">Damages</strong> — financial compensation</li>
+          <li><strong style="color:var(--text)">Specific performance</strong> — court order to fulfill</li>
+          <li><strong style="color:var(--text)">Termination</strong> — end the agreement legally</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- IP -->
+  <div class="tab-panel" id="ip">
+    <div class="card-grid" style="margin-bottom:1.5rem">
+      <div class="card">
+        <div class="card-icon">©️</div>
+        <h3>Copyright</h3>
+        <p>Protects creative works automatically.</p>
+        <ul>
+          <li>Official photographs & videos</li>
+          <li>Event website content</li>
+          <li>Promotional materials</li>
+          <li>Music played at event (requires license)</li>
+        </ul>
+        <p style="margin-top:8px"><span class="pill pill-green">Duration</span> Life + 70 years</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">™️</div>
+        <h3>Trademark</h3>
+        <p>Protects brand names and logos.</p>
+        <ul>
+          <li>Event name registration</li>
+          <li>Logo protection</li>
+          <li>Slogans (e.g. "Chase the Cheese")</li>
+          <li>Prevents counterfeit merchandise</li>
+        </ul>
+        <p style="margin-top:8px"><span class="pill pill-blue">Duration</span> Indefinite if renewed</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📺</div>
+        <h3>Media Rights</h3>
+        <ul>
+          <li>TV broadcast rights</li>
+          <li>Online streaming rights</li>
+          <li>Social media content rights</li>
+          <li>International distribution rights</li>
+        </ul>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)">Currently unprotected = major missed revenue</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛍️</div>
+        <h3>Merchandise Rights</h3>
+        <ul>
+          <li>License name/logo for products</li>
+          <li>Stop unauthorized sellers</li>
+          <li>Cease & desist for infringers</li>
+          <li>Register in multiple categories</li>
+        </ul>
+        <p style="margin-top:8px"><span class="pill pill-red">Risk</span> Counterfeit goods sold freely</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSONAL PROPERTY -->
+  <div class="tab-panel" id="property">
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">💼</div>
+        <h3>Bailment</h3>
+        <p>Temporary transfer of possession of property. If organizers take custody of attendee items (coat check, storage), they have a duty of care over those items.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏷️</div>
+        <h3>Title & Ownership</h3>
+        <p>Who legally owns property on event grounds? Disputes can arise over equipment, merchandise, or items left behind after the event.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <h3>Organizer Liability</h3>
+        <ul>
+          <li>Post "not responsible for lost items" signage</li>
+          <li>If negligent security caused theft — liability arises</li>
+          <li>Vendors should carry own property insurance</li>
+          <li>Advise participants to leave valuables at home</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏔️</div>
+        <h3>Land/Venue Damage</h3>
+        <ul>
+          <li>Post-event restoration responsibility</li>
+          <li>Ground damage costs from crowds</li>
+          <li>Landowner agreement must specify liability</li>
+          <li>Insurance must cover property damage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRIMINAL -->
+  <div class="tab-panel" id="criminal">
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          ⚖️ &nbsp; Negligence <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <p><strong>Criminal negligence</strong> occurs when organizers show reckless disregard for safety beyond simple mistakes.</p>
+          <ul>
+            <li>Ignoring council warnings about unsafe ground conditions</li>
+            <li>Allowing an intoxicated person to participate knowing they could harm others</li>
+            <li>Failing to provide adequate medical coverage despite knowing injury is likely</li>
+          </ul>
+          <p style="margin-top:10px"><span class="pill pill-red">Consequence</span> Could lead to manslaughter charges if a death occurs</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          🔓 &nbsp; Theft <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <ul>
+            <li>Pickpocketing in large crowds</li>
+            <li>Theft from vendor stalls</li>
+            <li>Unauthorized merchandise sellers stealing the event brand/name</li>
+            <li>Ticket scalping or fraudulent ticket sales</li>
+          </ul>
+          <p style="margin-top:10px"><strong>Mitigation:</strong> Security personnel, CCTV, clear anti-theft policies in vendor contracts</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          📄 &nbsp; Fraud <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <ul>
+            <li>Fake ticket sellers charging entry to a free event</li>
+            <li>Sponsors being misled about expected attendance numbers</li>
+            <li>Falsifying safety compliance documents to obtain permits</li>
+            <li>False advertising of event features or performers</li>
+          </ul>
+          <p style="margin-top:10px"><span class="pill pill-red">Consequence</span> Criminal fraud charges against the organizer</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          👊 &nbsp; Assault <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <ul>
+            <li>A participant deliberately pushing a competitor</li>
+            <li>Crowd fights among intoxicated spectators</li>
+            <li>Security staff using excessive force</li>
+            <li>Deliberate redirection of a cheese wheel into the crowd</li>
+          </ul>
+          <p style="margin-top:10px"><strong>Intentional</strong> = Criminal assault. <strong>Accidental</strong> = Falls under negligence/liability territory.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BUSINESS RISKS -->
+<section id="business">
+  <div class="reveal">
+    <div class="section-label">Business</div>
+    <div class="section-title">Business Risks</div>
+  </div>
+
+  <div class="accordion reveal">
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAccordion(this)">
+        📊 &nbsp; 1. Business Sustainability — Accounting Risks <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <ul>
+          <li>No formal bookkeeping or financial records</li>
+          <li>Cash transactions from vendors are untracked</li>
+          <li>No audit trail — making fraud easy to hide</li>
+          <li>Tax obligations on vendor income may go unreported</li>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAccordion(this)">
+        💰 &nbsp; 1. Business Sustainability — Financial Risks <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <ul>
+          <li>No stable income stream — entirely dependent on goodwill</li>
+          <li>Unexpected costs from medical emergencies or legal claims</li>
+          <li>Sponsorship withdrawal mid-planning</li>
+          <li>Low attendance due to bad weather killing vendor revenue</li>
+          <li>No financial reserves or contingency fund</li>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAccordion(this)">
+        🏷️ &nbsp; 1. Business Sustainability — Brand Reputation <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <ul>
+          <li>A serious injury or fatality caught on camera going viral negatively</li>
+          <li>Negative media framing — irresponsible, dangerous, reckless</li>
+          <li>Counterfeit merchandise damaging authentic brand image</li>
+          <li>A sponsor with a controversial reputation associating with the event</li>
+          <li>Social media backlash from safety advocacy groups</li>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAccordion(this)">
+        📣 &nbsp; 1. Business Sustainability — Marketing & Sales Risks <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <ul>
+          <li>No official marketing = inconsistent messaging</li>
+          <li>Third parties spreading misinformation about dates or location</li>
+          <li>Poor attendance due to lack of promotion</li>
+          <li>Unofficial ticket sellers creating confusion</li>
+          <li>Missed sponsorship revenue due to no formal sales pitch process</li>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAccordion(this)">
+        🚧 &nbsp; 2. Operations — Staging & Logistics Risks <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <ul>
+          <li>Cheese delivery failure — wrong type, late arrival, insufficient quantity</li>
+          <li>Barrier/fencing not installed on time creating safety gaps</li>
+          <li>Medical team delayed or understaffed on event day</li>
+          <li>Crowd flow bottlenecks at the hill entrance</li>
+          <li>Parking and transport chaos with international crowds</li>
+          <li>No clear communication system between staff</li>
+          <li>Hill access road too narrow for emergency vehicles</li>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAccordion(this)">
+        🌿 &nbsp; 3. Environmental Risks <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <ul>
+          <li>Heavy rain — hill becomes dangerously slippery, injuries multiply</li>
+          <li>Extreme heat — dehydration risk for participants and spectators</li>
+          <li>Ground erosion from thousands of feet damaging the hillside permanently</li>
+          <li>Waste management — litter left by large crowds harming local ecosystem</li>
+          <li>Noise pollution disturbing nearby residents and wildlife</li>
+          <li>Potential legal environmental liability if land is damaged</li>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-btn" onclick="toggleAccordion(this)">
+        🏢 &nbsp; 4. Corporate Culture Risks <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <ul>
+          <li>Volunteer burnout — event relies heavily on informal volunteers with no HR structure</li>
+          <li>No clear leadership — decision-making is chaotic</li>
+          <li>Cultural insensitivity — international crowds may disrespect local traditions</li>
+          <li>Sponsor values mismatch with the event's heritage feel</li>
+          <li>Communication breakdown between landowner, local council, and event community</li>
+          <li>Risk of the event losing its authentic local identity as it grows commercially</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RISK IDENTIFICATION CHECKLIST -->
+<section id="identify">
+  <div class="reveal">
+    <div class="section-label">Step 01</div>
+    <div class="section-title">Risk<br>Identification</div>
+    <p style="color:var(--muted);margin-bottom:2rem">Check off each question that applies to your event. The more you check, the higher your legal risk exposure.</p>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);padding:1.5rem 2rem;" class="reveal">
+    <ul class="checklist" id="checklist">
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Is alcohol being served at the event?</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Are children and minors in attendance?</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Are dangerous or hazardous activities undertaken (fireworks, sports, stunts)?</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Are large crowds expected to attend?</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Does the event involve physical activities or competitions?</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Is food going to be cooked or served?</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Are activities contracted out (e.g. food vendors, security firms)?</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Is travelling required for participants?</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Is the event outdoors and exposed to weather?</span></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;align-items:center;gap:1rem">
+      <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em">Risk Exposure</span>
+      <span id="checkScore" style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--accent)">0 / 9</span>
+      <span id="checkLevel" style="font-size:13px;color:var(--muted)"></span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 5x5 MATRIX -->
+<section id="matrix">
+  <div class="reveal">
+    <div class="section-label">Step 02</div>
+    <div class="section-title">5×5 Risk<br>Assessment Matrix</div>
+    <p style="color:var(--muted);margin-bottom:2rem">Hover over cells to see the risk score. Score = Likelihood × Impact. Use the builder below to assess your own event risks.</p>
+  </div>
+
+  <div class="matrix-wrap reveal">
+    <div class="matrix-container">
+      <div class="matrix-y-label">Likelihood →</div>
+      <div class="matrix-inner">
+        <div class="matrix-grid" id="matrixGrid"></div>
+        <div class="matrix-x-label">Impact →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend reveal">
+    <div class="legend-item"><div class="legend-dot low">1–5</div><span>Low — Monitor only</span></div>
+    <div class="legend-item"><div class="legend-dot medium">6–12</div><span>Medium — Manage carefully</span></div>
+    <div class="legend-item"><div class="legend-dot high">13–19</div><span>High — Immediate action</span></div>
+    <div class="legend-item"><div class="legend-dot critical">20–25</div><span>Critical — Must be eliminated</span></div>
+  </div>
+
+  <!-- RISK BUILDER -->
+  <div class="risk-builder reveal" style="margin-top:3rem">
+    <h3>🧀 Build Your Risk Register</h3>
+    <div class="risk-inputs">
+      <div class="input-group">
+        <label>Risk Description</label>
+        <input type="text" id="riskName" placeholder="e.g. Participant injury">
+      </div>
+      <div class="input-group">
+        <label>Likelihood (1–5)</label>
+        <select id="riskLikelihood">
+          <option value="1">1 — Rare</option>
+          <option value="2">2 — Unlikely</option>
+          <option value="3">3 — Possible</option>
+          <option value="4">4 — Likely</option>
+          <option value="5">5 — Almost Certain</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Impact (1–5)</label>
+        <select id="riskImpact">
+          <option value="1">1 — Insignificant</option>
+          <option value="2">2 — Minor</option>
+          <option value="3">3 — Moderate</option>
+          <option value="4">4 — Major</option>
+          <option value="5">5 — Catastrophic</option>
+        </select>
+      </div>
+      <button class="add-btn" onclick="addRisk()">+ Add Risk</button>
+    </div>
+
+    <div id="riskTableWrap">
+      <div class="empty-state" id="emptyState">No risks added yet. Use the form above to build your risk register.</div>
+      <table class="risk-table" id="riskTable" style="display:none">
+        <thead>
+          <tr>
+            <th>Risk</th>
+            <th>Likelihood</th>
+            <th>Impact</th>
+            <th>Score</th>
+            <th>Level</th>
+            <th>Response</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="riskBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RISK RESPONSE -->
+<section id="respond">
+  <div class="reveal">
+    <div class="section-label">Step 03</div>
+    <div class="section-title">Risk Response<br>Strategies</div>
+  </div>
+
+  <div class="response-grid reveal">
+    <div class="response-card avoid">
+      <div class="r-label">Strategy 01</div>
+      <h3>Avoid</h3>
+      <p>Eliminate the risk entirely by changing plans or cancelling risky elements.</p>
+      <div class="example"><strong>Cooper's Hill:</strong> Cancel the race entirely when ground conditions are dangerously wet.</div>
+    </div>
+    <div class="response-card transfer">
+      <div class="r-label">Strategy 02</div>
+      <h3>Transfer</h3>
+      <p>Pass the risk to another party — typically through insurance, waivers, or subcontracting.</p>
+      <div class="example"><strong>Cooper's Hill:</strong> Require participant liability waivers; purchase event insurance.</div>
+    </div>
+    <div class="response-card minimize">
+      <div class="r-label">Strategy 03</div>
+      <h3>Minimize</h3>
+      <p>Reduce the likelihood or impact of the risk through preventative measures.</p>
+      <div class="example"><strong>Cooper's Hill:</strong> Add on-site medical staff, install barriers, run safety briefings.</div>
+    </div>
+    <div class="response-card optimize">
+      <div class="r-label">Strategy 04</div>
+      <h3>Optimize</h3>
+      <p>Turn a risk into an opportunity — accept it and find a way to benefit from it.</p>
+      <div class="example"><strong>Cooper's Hill:</strong> Use viral injury footage (with consent) as part of marketing strategy.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- MONITOR & REVIEW -->
+<section id="monitor">
+  <div class="reveal">
+    <div class="section-label">Step 04</div>
+    <div class="section-title">Monitor<br>& Review</div>
+    <p style="color:var(--muted);margin-bottom:2rem;max-width:600px">Risk management is not a one-time task. Keep revisiting your assessment throughout the event lifecycle.</p>
+  </div>
+
+  <div class="monitor-grid reveal">
+    <div class="monitor-item">
+      <div class="monitor-icon">🔄</div>
+      <div>
+        <h4>Revisit Assessment</h4>
+        <p>Regularly return to your risk register and check if anything has changed.</p>
+      </div>
+    </div>
+    <div class="monitor-item">
+      <div class="monitor-icon">🔍</div>
+      <div>
+        <h4>Look for Changes</h4>
+        <p>New venue layout, weather forecasts, or crowd size estimates may introduce new risks.</p>
+      </div>
+    </div>
+    <div class="monitor-item">
+      <div class="monitor-icon">📈</div>
+      <div>
+        <h4>Track Improvements</h4>
+        <p>Document what mitigation steps have been completed and what still needs action.</p>
+      </div>
+    </div>
+    <div class="monitor-item">
+      <div class="monitor-icon">💡</div>
+      <div>
+        <h4>Learn from Incidents</h4>
+        <p>Record any accidents or near-misses and update the register to prevent recurrence.</p>
+      </div>
+    </div>
+    <div class="monitor-item">
+      <div class="monitor-icon">📅</div>
+      <div>
+        <h4>Stay Current</h4>
+        <p>Ensure your risk assessment always reflects the most up-to-date situation.</p>
+      </div>
+    </div>
+    <div class="monitor-item">
+      <div class="monitor-icon">👥</div>
+      <div>
+        <h4>Team Review</h4>
+        <p>Involve your full team in reviews — different roles spot different risks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="reveal">
+    <div class="section-label">Test Yourself</div>
+    <div class="section-title">Quick Quiz</div>
+    <p style="color:var(--muted);margin-bottom:2rem">Test your understanding of risk management concepts.</p>
+  </div>
+
+  <div class="quiz-wrap reveal" id="quizWrap"></div>
+
+  <div class="quiz-score reveal" id="quizScore">
+    <div class="score-num" id="scoreFinal"></div>
+    <p id="scoreMsg"></p>
+    <br>
+    <button class="reset-btn" onclick="resetQuiz()">Try Again</button>
+  </div>
+</section>
+
+<footer>
+  Leisure Events · Week 17 · Risk Management · JAMK University of Applied Sciences
+</footer>
+
+<script>
+// ─── TABS ───────────────────────────────────────
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+// ─── ACCORDION ──────────────────────────────────
+function toggleAccordion(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+// ─── CHECKLIST ──────────────────────────────────
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const checked = document.querySelectorAll('#checklist li.checked').length;
+  const total = document.querySelectorAll('#checklist li').length;
+  document.getElementById('checkScore').textContent = `${checked} / ${total}`;
+  const lvl = document.getElementById('checkLevel');
+  if (checked <= 2) { lvl.textContent = '— Low exposure'; lvl.style.color = 'var(--green)'; }
+  else if (checked <= 5) { lvl.textContent = '— Medium exposure'; lvl.style.color = 'var(--accent3)'; }
+  else if (checked <= 7) { lvl.textContent = '— High exposure'; lvl.style.color = 'var(--accent2)'; }
+  else { lvl.textContent = '— Critical exposure'; lvl.style.color = 'var(--accent)'; }
+}
+
+// ─── MATRIX ─────────────────────────────────────
+function getClass(score) {
+  if (score <= 5) return 'low';
+  if (score <= 12) return 'medium';
+  if (score <= 19) return 'high';
+  return 'critical';
+}
+
+function buildMatrix() {
+  const grid = document.getElementById('matrixGrid');
+  grid.innerHTML = '';
+  for (let row = 5; row >= 1; row--) {
+    const rowLabel = document.createElement('div');
+    rowLabel.className = 'matrix-cell row-label';
+    rowLabel.textContent = row;
+    grid.appendChild(rowLabel);
+    for (let col = 1; col <= 5; col++) {
+      const score = row * col;
+      const cell = document.createElement('div');
+      cell.className = `matrix-cell data ${getClass(score)}`;
+      cell.textContent = score;
+      const tip = document.createElement('div');
+      tip.className = 'tooltip';
+      tip.textContent = `L:${row} × I:${col} = ${score} (${getClass(score).toUpperCase()})`;
+      cell.appendChild(tip);
+      grid.appendChild(cell);
+    }
+  }
+  const corner = document.createElement('div');
+  corner.className = 'matrix-cell corner';
+  grid.appendChild(corner);
+  for (let col = 1; col <= 5; col++) {
+    const label = document.createElement('div');
+    label.className = 'matrix-cell col-label';
+    label.textContent = col;
+    grid.appendChild(label);
+  }
+}
+
+buildMatrix();
+
+// ─── RISK BUILDER ───────────────────────────────
+let risks = [];
+
+function getResponse(score) {
+  if (score >= 20) return 'Avoid';
+  if (score >= 13) return 'Minimize';
+  if (score >= 6) return 'Transfer';
+  return 'Monitor';
+}
+
+function addRisk() {
+  const name = document.getElementById('riskName').value.trim();
+  const l = parseInt(document.getElementById('riskLikelihood').value);
+  const i = parseInt(document.getElementById('riskImpact').value);
+  if (!name) { document.getElementById('riskName').focus(); return; }
+  risks.push({ name, l, i, score: l * i });
+  document.getElementById('riskName').value = '';
+  renderRisks();
+}
+
+function deleteRisk(idx) {
+  risks.splice(idx, 1);
+  renderRisks();
+}
+
+function renderRisks() {
+  const empty = document.getElementById('emptyState');
+  const table = document.getElementById('riskTable');
+  const body = document.getElementById('riskBody');
+  if (risks.length === 0) { empty.style.display = 'block'; table.style.display = 'none'; return; }
+  empty.style.display = 'none';
+  table.style.display = 'table';
+  body.innerHTML = risks.map((r, idx) => {
+    const cls = getClass(r.score);
+    const colors = { low: 'var(--green)', medium: 'var(--accent3)', high: 'var(--accent2)', critical: 'var(--accent)' };
+    const col = colors[cls];
+    return `<tr>
+      <td style="font-weight:600">${r.name}</td>
+      <td>${r.l}</td>
+      <td>${r.i}</td>
+      <td><span class="score-badge ${cls}">${r.score}</span></td>
+      <td style="color:${col};text-transform:capitalize;font-size:12px;font-weight:600">${cls}</td>
+      <td style="color:${col};font-size:12px">${getResponse(r.score)}</td>
+      <td><button class="del-btn" onclick="deleteRisk(${idx})">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ─── QUIZ ────────────────────────────────────────
+const questions = [
+  {
+    q: "What is the overall goal of risk management?",
+    opts: [
+      "To eliminate all risks at an event",
+      "The optimization of acceptable risks and minimization of unacceptable risks",
+      "To avoid all outdoor events",
+      "To transfer all risks to insurance companies"
+    ],
+    ans: 1,
+    explain: "Risk management optimizes acceptable risks and minimizes/eliminates unacceptable ones — not eliminate all risk entirely."
+  },
+  {
+    q: "A participant signs a waiver but an organizer knowingly allowed unsafe ground conditions. Which law applies?",
+    opts: ["Contract law — the waiver protects the organizer", "Tort law — professional duty of care was breached", "Criminal law — this is fraud", "Environmental law"],
+    ans: 1,
+    explain: "Waivers cannot waive liability for gross negligence. Tort law's professional duty of care applies when organizers knowingly allow unsafe conditions."
+  },
+  {
+    q: "In a 5×5 matrix, what score results from Likelihood 4 × Impact 5?",
+    opts: ["9", "16", "20", "25"],
+    ans: 2,
+    explain: "4 × 5 = 20. This falls in the CRITICAL zone (20–25), requiring immediate elimination or avoidance."
+  },
+  {
+    q: "Which risk response strategy involves passing risk to an insurance company?",
+    opts: ["Avoid", "Minimize", "Transfer", "Optimize"],
+    ans: 2,
+    explain: "Transfer means passing the risk to another party — typically through insurance policies, liability waivers, or subcontracting."
+  },
+  {
+    q: "Which of the following is NOT one of the 5 essential elements of a valid contract?",
+    opts: ["Offer", "Acceptance", "Profit", "Consideration"],
+    ans: 2,
+    explain: "The 5 elements are: Offer, Acceptance, Consideration, Intention, and Capacity. Profit is not a legal requirement for a contract."
+  },
+  {
+    q: "An event's name and logo can be protected by:",
+    opts: ["Copyright", "Trademark", "Patent", "Bailment"],
+    ans: 1,
+    explain: "Trademarks protect brand names, logos, and slogans. Copyright protects creative works like photos and videos."
+  },
+  {
+    q: "What is 'bailment' in the context of personal property?",
+    opts: ["Posting bail after an event arrest", "Temporary transfer of possession of property to another party", "A type of sponsorship contract", "Insurance for event equipment"],
+    ans: 1,
+    explain: "Bailment is the temporary transfer of possession of property. If you take custody of someone's item (e.g. coat check), you have a duty of care over it."
+  },
+  {
+    q: "A risk score of 8 on the 5×5 matrix falls into which zone?",
+    opts: ["Low (1–5)", "Medium (6–12)", "High (13–19)", "Critical (20–25)"],
+    ans: 1,
+    explain: "A score of 8 falls in the Medium zone (6–12), requiring careful management with contingency plans."
+  }
+];
+
+let answered = 0;
+let correct = 0;
+
+function buildQuiz() {
+  const wrap = document.getElementById('quizWrap');
+  wrap.innerHTML = questions.map((q, qi) => `
+    <div class="quiz-q" id="q${qi}">
+      <div class="q-text">${qi + 1}. ${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o, oi) => `<button class="quiz-opt" onclick="answer(${qi},${oi})">${o}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb${qi}"></div>
+    </div>
+  `).join('');
+  answered = 0; correct = 0;
+  document.getElementById('quizScore').style.display = 'none';
+}
+
+function answer(qi, oi) {
+  const q = questions[qi];
+  const btns = document.querySelectorAll(`#q${qi} .quiz-opt`);
+  btns.forEach(b => b.disabled = true);
+  const fb = document.getElementById(`fb${qi}`);
+  if (oi === q.ans) {
+    btns[oi].classList.add('correct');
+    fb.textContent = '✓ Correct! ' + q.explain;
+    fb.style.color = 'var(--green)';
+    correct++;
+  } else {
+    btns[oi].classList.add('wrong');
+    btns[q.ans].classList.add('correct');
+    fb.textContent = '✗ ' + q.explain;
+    fb.style.color = 'var(--accent)';
+  }
+  answered++;
+  if (answered === questions.length) {
+    setTimeout(() => {
+      const score = document.getElementById('quizScore');
+      const pct = Math.round((correct / questions.length) * 100);
+      document.getElementById('scoreFinal').textContent = `${correct}/${questions.length}`;
+      const msgs = [
+        [0, 50, "Keep reviewing — go back through the sections above!"],
+        [50, 75, "Good effort! Review the sections you missed."],
+        [75, 90, "Great work! You've got a solid grasp of risk management."],
+        [90, 101, "Excellent! You're ready for the exam. 🎉"]
+      ];
+      document.getElementById('scoreMsg').textContent = msgs.find(([lo, hi]) => pct >= lo && pct < hi)[2];
+      score.style.display = 'block';
+      score.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 500);
+  }
+}
+
+function resetQuiz() {
+  buildQuiz();
+  document.getElementById('quizWrap').scrollIntoView({ behavior: 'smooth' });
+}
+
+buildQuiz();
+
+// ─── SCROLL REVEAL ───────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
